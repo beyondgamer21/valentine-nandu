@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love 💖</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #ff758c, #ff7eb3);
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.9);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            bottom: 0;
+            font-size: 2em;
+            color: pink;
+            opacity: 0.7;
+            animation: float 5s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        /* Flipping Card */
+        .card-container {
+            perspective: 1000px;
+            margin-top: 20px;
+            width: 260px;
+            height: 360px;
+            animation: fadeInUp 2s ease-in-out;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+        }
+
+        .card-container:hover .card {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-front {
+            background: #ff5e8d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            border: 4px solid white;
+            color: white;
+            transition: background 0.5s;
+        }
+
+        .card-back {
+            background: white;
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid pink;
+        }
+
+        .card-back img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+        }
+
+        /* Click to Reveal Surprise */
+        .surprise-container {
+            margin-top: 30px;
+        }
+
+        .reveal-button {
+            background: #ff3e73;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 1.3em;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(255, 0, 100, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        .reveal-button:hover {
+            background: #ff2458;
+            transform: scale(1.05);
+        }
+
+        .hidden-message {
+            display: none;
+            font-size: 1.6em;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+
+        /* Typewriter Effect */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .typewriter-text {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid white;
+            width: 0;
+            display: inline-block;
+            animation: typing 3s steps(40, end) forwards, blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Happy Valentine's Day, My Love! 💖</h1>
+
+    <!-- Flipping Card -->
+    <div class="card-container">
+        <div class="card">
+            <div class="card-front">Click to Flip 💝</div>
+            <div class="card-back">
+                <img src="your-photo.jpg" alt="Our Memory">
+            </div>
+        </div>
+    </div>
+
+    <!-- Surprise Section -->
+    <div class="surprise-container">
+        <button class="reveal-button" onclick="revealSurprise()">Click to Reveal a Surprise 💕</button>
+        <div class="hidden-message" id="surprise-message">
+            <span class="typewriter-text">
+                My love for you is endless, shining brighter than the stars. 
+                You are my heart, my happiness, and my forever. I love you endlessly. 💞  
+            </span>
+        </div>
+    </div>
+
+    <!-- Audio Player -->
+    <audio autoplay loop>
+        <source src="perfect.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function revealSurprise() {
+            document.getElementById('surprise-message').style.display = 'block';
+            createHearts();
+        }
+
+        function createHearts() {
+            let heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                document.body.removeChild(heart);
+            }, 5000);
+
+            setTimeout(createHearts, 800);
+        }
+
+        // Generate floating hearts automatically
+        setInterval(createHearts, 1200);
+    </script>
+
+</body>
+</html>
